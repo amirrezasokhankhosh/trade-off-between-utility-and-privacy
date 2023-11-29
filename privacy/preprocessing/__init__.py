@@ -60,7 +60,7 @@ def scale_encode_data(
             features = pd.concat([num, features], axis=1)
             targets = [embeded_targets[i] for i in union]
             targets_df = pd.DataFrame(np.array(targets).T, columns=["salary_class"])
-            pr_data = pd.concat([features_save, targets_df])
+            pr_data = pd.concat([features_save, targets_df], axis=1)
         elif data == "texas":
             features_save = features.copy()
             num = features[["LENGTH_OF_STAY"]].copy()
@@ -118,7 +118,7 @@ def scale_encode_data(
             features = pd.concat([num, features], axis=1)
             targets = [embeded_targets[i] for i in union]
             targets_df = pd.DataFrame(np.array(targets).T, columns=["salary_class"])
-            pr_data = pd.concat([features_save, targets_df])
+            pr_data = pd.concat([features_save, targets_df], axis=1)
             scalars = scalar
         elif data == "texas":
             features_save = features.copy()

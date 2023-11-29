@@ -27,7 +27,7 @@ def encodeData(data, method, k):
     
     return pr_data, X_org, y_org, pr_data_anon, X_anon, y_anon
 
-def encodeNonAnonData(data, path):
+def encodeNonAnonData(data, path, is_syn=False):
     app_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     data_path = os.path.join(app_path, f'data/{data}')
     ori_csv = os.path.join(data_path, f'train.csv')
@@ -35,14 +35,23 @@ def encodeNonAnonData(data, path):
     QI_INDEX = data_params['qi_index']
     IS_CAT = data_params['is_category']
     scalars, _, _, _ = scale_encode_data(data, ori_csv, QI_INDEX, IS_CAT)
-    _, pr_data, X, y = scale_encode_data(
-        data,
-        ori_csv,
-        scalars=scalars,
-        anon_csv=path,
-        qi_index=QI_INDEX, 
-        is_cat=IS_CAT,
-        att_trees=None)
+    if is_syn:
+        _, pr_data, X, y = scale_encode_data(
+            data,
+            ori_csv,
+            anon_csv=path,
+            qi_index=QI_INDEX, 
+            is_cat=IS_CAT,
+            att_trees=None)
+    else:
+        _, pr_data, X, y = scale_encode_data(
+            data,
+            ori_csv,
+            scalars=scalars,
+            anon_csv=path,
+            qi_index=QI_INDEX, 
+            is_cat=IS_CAT,
+            att_trees=None)
     return pr_data, X, y
 
 if __name__ == '__main__':
