@@ -4,10 +4,10 @@ from datasets import get_dataset_params
 import pandas as pd
 
 
-def encodeData(data, method, k):
+def encodeData(data, k, method="mondrian"):
     app_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
     data_path = os.path.join(app_path, f'data/{data}')
-    result_path = os.path.join(app_path, 'mondrian_results')
+    result_path = os.path.join(app_path, f'{method}_results')
 
     data_params = get_dataset_params(data)
     QI_INDEX = data_params['qi_index']

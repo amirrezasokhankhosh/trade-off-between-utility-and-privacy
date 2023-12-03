@@ -17,9 +17,10 @@ def get_dataset_params(name):
     elif name == Dataset.TEXAS:
         QI_INDEX = [i for i in range(1, 13)]
         target_var = "TOTAL_CHARGES"
-        IS_CAT = [True for _ in range(11)] + [False]
+        # IS_CAT = [True for _ in range(11)] + [False]
+        IS_CAT = [True for _ in range(12)]
         max_numeric = {
-            "LENGTH_OF_STAY" : 1380
+            # "LENGTH_OF_STAY" : 1380
         }
     elif name == Dataset.OCCUPANCY:
         QI_INDEX = [i for i in range(1, 17)]

@@ -33,6 +33,7 @@ def scale_encode_data(
 
     if anon_csv is not None:
         anon_df = pd.read_csv(anon_csv, delimiter=';')
+        targets = list(anon_df.iloc[:, -1])
         anon_df = anon_df.drop(['ID'], axis=1)
         anon_df = anon_df.drop(anon_df.columns[-1], axis=1)
 
@@ -63,15 +64,15 @@ def scale_encode_data(
             pr_data = pd.concat([features_save, targets_df], axis=1)
         elif data == "texas":
             features_save = features.copy()
-            num = features[["LENGTH_OF_STAY"]].copy()
-            features.drop(["LENGTH_OF_STAY"], axis=1, inplace=True)
+            # num = features[["LENGTH_OF_STAY"]].copy()
+            # features.drop(["LENGTH_OF_STAY"], axis=1, inplace=True)
             if not scalars:
                 scalar = StandardScaler()
-                num = pd.DataFrame(scalar.fit_transform(num), columns=["LENGTH_OF_STAY"])
+                # num = pd.DataFrame(scalar.fit_transform(num), columns=["LENGTH_OF_STAY"])
             else:
                 scalar = scalars[0]
-                num = pd.DataFrame(scalar.transform(num), columns=["LENGTH_OF_STAY"])
-            features = pd.concat([num, features], axis=1)
+                # num = pd.DataFrame(scalar.transform(num), columns=["LENGTH_OF_STAY"])
+            # features = pd.concat([num, features], axis=1)
             targets_df = pd.DataFrame(np.array(targets).T, columns=["TOTAL_CHARGES"])
             if not scalars:
                 scalar_out = StandardScaler()
@@ -122,11 +123,11 @@ def scale_encode_data(
             scalars = scalar
         elif data == "texas":
             features_save = features.copy()
-            num = features[["LENGTH_OF_STAY"]].copy()
-            features.drop(["LENGTH_OF_STAY"], axis=1, inplace=True)
+            # num = features[["LENGTH_OF_STAY"]].copy()
+            # features.drop(["LENGTH_OF_STAY"], axis=1, inplace=True)
             scalar = StandardScaler()
-            num = pd.DataFrame(scalar.fit_transform(num), columns=["LENGTH_OF_STAY"])
-            features = pd.concat([num, features], axis=1)
+            # num = pd.DataFrame(scalar.fit_transform(num), columns=["LENGTH_OF_STAY"])
+            # features = pd.concat([num, features], axis=1)
             targets_df = pd.DataFrame(np.array(targets).T, columns=["TOTAL_CHARGES"])
             scalar_out = StandardScaler()
             targets = pd.DataFrame(scalar_out.fit_transform(np.array(targets).reshape((-1, 1))), columns=["TOTAL_CHARGES"])
